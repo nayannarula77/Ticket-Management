@@ -1,0 +1,35 @@
+<div fxLayoutAlign="center center" fxFlexFill >
+    <mat-card fxFlex="28">
+        <mat-toolbar color="primary">Sign Up</mat-toolbar>
+        <form fxLayoutAlign="stretch" fxLayout="column">
+            <mat-form-field >
+                <input matInput placeholder="Name" type="text">
+            </mat-form-field>
+            <mat-form-field >
+                <input matInput placeholder="Email" type="email">
+            </mat-form-field>
+            <mat-form-field >
+                <input matInput placeholder="Password" type="password">
+            </mat-form-field>
+            <mat-form-field >
+                <mat-label>User Type</mat-label>
+                <mat-select appearance="fill">
+                  <mat-option value="Admin" >
+                    Admin
+                  </mat-option>
+                  <mat-option value="User" >
+                    User
+                  </mat-option>
+                  <mat-option value="Member">
+                    Member
+                  </mat-option>
+                </mat-select>
+                </mat-form-field>
+                <a routerLink="/" fxLayoutAlign="center" mat-raised-button type="submit" color="primary" (click)="show()">Submit</a>
+        </form>
+        
+    </mat-card>
+    
+    
+    
+    </div>
