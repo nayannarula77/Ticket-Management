@@ -1,31 +1,31 @@
 <div fxLayoutAlign="center center" fxFlexFill >
     <mat-card fxFlex="28">
         <mat-toolbar color="primary">Sign Up</mat-toolbar>
-        <form fxLayoutAlign="stretch" fxLayout="column">
+        <form fxLayoutAlign="stretch" fxLayout="column" [formGroup]="formGroup">
             <mat-form-field >
-                <input matInput placeholder="Name" type="text">
+                <input matInput placeholder="Name" type="text" formControlName="name" >
             </mat-form-field>
             <mat-form-field >
-                <input matInput placeholder="Email" type="email">
+                <input matInput placeholder="Email" type="email" formControlName="email">
             </mat-form-field>
             <mat-form-field >
-                <input matInput placeholder="Password" type="password">
+                <input matInput placeholder="Password(min. 6 characters, no spaces allowed)" type="password" formControlName="password">
             </mat-form-field>
             <mat-form-field >
                 <mat-label>User Type</mat-label>
-                <mat-select appearance="fill">
-                  <mat-option value="Admin" >
-                    Admin
+                <mat-select appearance="fill" formControlName="usertype">
+                  <mat-option value="ADMIN" >
+                    ADMIN
                   </mat-option>
-                  <mat-option value="User" >
-                    User
+                  <mat-option value="USER" >
+                    USER
                   </mat-option>
-                  <mat-option value="Member">
-                    Member
+                  <mat-option value="MEMBER">
+                    MEMBER
                   </mat-option>
                 </mat-select>
                 </mat-form-field>
-                <a routerLink="/" fxLayoutAlign="center" mat-raised-button type="submit" color="primary" (click)="show()">Submit</a>
+                <button routerLink="/" fxLayoutAlign="center" mat-raised-button type="submit" color="primary" (click)="show()" [disabled]="!formGroup.valid" >Submit</button>
         </form>
         
     </mat-card>

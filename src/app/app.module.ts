@@ -25,6 +25,10 @@ import { FormsModule } from '@angular/forms';
 import {MatDialogModule} from '@angular/material/dialog';
 import { AdminviewticketComponent } from './components/adminviewticket/adminviewticket.component';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
+import {MatListModule} from '@angular/material/list';
+import { AdminviewgroupComponent } from './components/adminviewgroup/adminviewgroup.component';
+import { AdminaddmemberComponent } from './components/adminaddmember/adminaddmember.component';
+import { HttpClientModule } from '@angular/common/http';
 
 
 @NgModule({
@@ -36,7 +40,9 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
     AdminticketComponent,
     AdmingroupComponent,
     AdmincategoryComponent,
-    AdminviewticketComponent
+    AdminviewticketComponent,
+    AdminviewgroupComponent,
+    AdminaddmemberComponent
   ],
   imports: [
     BrowserModule,
@@ -55,7 +61,9 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
     ReactiveFormsModule,
     FormsModule,
     MatDialogModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatListModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

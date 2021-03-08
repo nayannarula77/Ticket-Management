@@ -11,5 +11,6 @@ export class AdminviewticketComponent implements OnInit {
 
   ngOnInit(): void {
   }
+  
 
 }
