@@ -29,6 +29,7 @@ import {MatListModule} from '@angular/material/list';
 import { AdminviewgroupComponent } from './components/adminviewgroup/adminviewgroup.component';
 import { AdminaddmemberComponent } from './components/adminaddmember/adminaddmember.component';
 import { HttpClientModule } from '@angular/common/http';
+import { AdminviewmemberbygroupidComponent } from './components/adminviewmemberbygroupid/adminviewmemberbygroupid.component';
 
 
 @NgModule({
@@ -42,7 +43,8 @@ import { HttpClientModule } from '@angular/common/http';
     AdmincategoryComponent,
     AdminviewticketComponent,
     AdminviewgroupComponent,
-    AdminaddmemberComponent
+    AdminaddmemberComponent,
+    AdminviewmemberbygroupidComponent
   ],
   imports: [
     BrowserModule,

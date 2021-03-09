@@ -90,7 +90,7 @@ export class AdmingroupComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  displayedColumns: string[] = ['sno', 'name','category', 'view'];
+  displayedColumns: string[] = ['sno', 'name','category'];
  
   dataSource=new MatTableDataSource(this.collection);
   

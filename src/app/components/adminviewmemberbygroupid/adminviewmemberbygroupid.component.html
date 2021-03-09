@@ -2,7 +2,7 @@
     <p>
         <mat-toolbar color="primary">
           
-          <span>Add Members to Group</span>
+          <span>View Members By Group ID</span>
     
           <div class="spacer"></div>
         <a mat-button routerLink="/adminticket">Ticket</a>
@@ -18,23 +18,19 @@
     
       <form fxLayoutAlign="center center" fxLayout="column" [formGroup]="formGroup">
         <mat-form-field >
-            <input matInput placeholder="Enter User Id" type="number" formControlName="memberId">
-        </mat-form-field>
-        <mat-form-field >
             <input matInput placeholder="Enter Group Id" type="number" formControlName="groupId">
         </mat-form-field>
-        <button mat-raised-button color="primary" (click)="add()" type="button" [disabled]="!formGroup.valid">Add</button>
+        <button mat-raised-button color="primary" (click)="show()" type="button" [disabled]="!formGroup.valid">View Members</button>
         <hr width="17%" size="8" align="center" color="blue">
         <mat-form-field fxLayoutAlign="end">
           <input (keyup)="applyFilter($event)" matInput placeholder="Search">
         </mat-form-field>
     </form>
-    <hr width="17%" size="8" align="center" color="blue">
+    
 
+    
+    
     <br>
-   <h3 fxLayoutAlign="center center">Registered Members</h3> 
-    
-    
       <table mat-table [dataSource]="dataSource" class="mat-elevation-z8"  fxFlexFill>
     
         

@@ -85,7 +85,7 @@ export class AdminticketComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  displayedColumns: string[] = ['sno', 'title','description', 'category','status', 'priority', 'creator', 'assignedto','comment','attachment'];
+  displayedColumns: string[] = ['sno', 'title','description', 'category','status', 'priority', 'creator', 'assignedto','startdate','duedate','comment','attachment'];
   //dataSource = new MatTableDataSource(ELEMENT_DATA);
 
   applyFilter(event: any){

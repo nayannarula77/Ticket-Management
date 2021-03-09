@@ -17,6 +17,7 @@
     <mat-form-field fxLayoutAlign="end">
       <input (keyup)="applyFilter($event)" matInput placeholder="Search">
     </mat-form-field>
+    <hr width="17%" size="8" align="center" color="blue">
     <mat-form-field >
         <input matInput placeholder=" Group Name" type="text" formControlName="name">
     </mat-form-field>
@@ -32,6 +33,7 @@
 
 
 
+
   <table mat-table [dataSource]="dataSource" class="mat-elevation-z8"  fxFlexFill>
 
     <!--- Note that these columns can be defined in any order.
@@ -39,7 +41,7 @@
   
     <!-- Position Column -->
     <ng-container matColumnDef="sno">
-      <th mat-header-cell *matHeaderCellDef> S.No </th>
+      <th mat-header-cell *matHeaderCellDef> Group ID </th>
       <td mat-cell *matCellDef="let element"> {{element.groupId}} </td>
     </ng-container>
   
@@ -54,11 +56,7 @@
       <td mat-cell *matCellDef="let element"> {{element.category.name}} </td>
     </ng-container>
   
-    <ng-container matColumnDef="view">
-      <th mat-header-cell *matHeaderCellDef>  </th>
-     
-      <td mat-cell *matCellDef="let element">  <button mat-raised-button color="primary" (click)="openViewGroupDialog()">View/Add Members</button> </td> 
-    </ng-container>
+    
 
     
     
@@ -66,5 +64,10 @@
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
   </table>
+
+
+  <a mat-raised-button routerLink="/adminaddmember" color="primary" fxFlexFill>Add Members to Group</a>
+  <br><br>
+  <a mat-raised-button routerLink="/adminviewmemberbygroupid" color="primary" fxFlexFill>View Members By Group ID</a>
 
 </div>

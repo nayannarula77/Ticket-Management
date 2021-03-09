@@ -4,7 +4,6 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatTable, MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 
-
 class User{
   userId:number;
   name:string;
@@ -22,14 +21,13 @@ class User{
 }
 
 @Component({
-  selector: 'app-adminaddmember',
-  templateUrl: './adminaddmember.component.html',
-  styleUrls: ['./adminaddmember.component.css']
+  selector: 'app-adminviewmemberbygroupid',
+  templateUrl: './adminviewmemberbygroupid.component.html',
+  styleUrls: ['./adminviewmemberbygroupid.component.css']
 })
-export class AdminaddmemberComponent implements OnInit {
+export class AdminviewmemberbygroupidComponent implements OnInit {
 
   formGroup: FormGroup = new FormGroup({
-    memberId: new FormControl('',Validators.required),
     groupId: new FormControl('',Validators.required)
   })
 
@@ -41,8 +39,13 @@ export class AdminaddmemberComponent implements OnInit {
 
   dataSource:any;
 
-  constructor(private http:HttpClient,public router: Router) {
-    let url="http://localhost:8080/user/member";
+  constructor(private http:HttpClient,public router: Router) { }
+
+  ngOnInit(): void {
+  }
+
+  show(){
+    let url="http://localhost:8080/group/"+this.formGroup.value.groupId+"/member";
     this.http.get<any>(url).subscribe(
       response=>{
         console.log(response);
@@ -51,26 +54,12 @@ export class AdminaddmemberComponent implements OnInit {
         console.log(this.collection);
       }
     )
-   }
-
-  ngOnInit(): void {
   }
+
+  applyFilter(event: any){
+    this.dataSource.filter = event.target.value.trim().toLowerCase();
+  }
+
   displayedColumns: string[] = ['userId', 'name'];
-  add(){
-
-    let url="http://localhost:8080/group/"+this.formGroup.value.groupId+"/member";
-    console.log(this.formGroup.value.userId);
-    this.http.put(url, {
-      userId:this.formGroup.value.memberId
-    }).toPromise().then((data:any)=>{
-      console.log(data);
-     
-    });
-    
-}
-
-applyFilter(event: any){
-  this.dataSource.filter = event.target.value.trim().toLowerCase();
-}
 
 }
