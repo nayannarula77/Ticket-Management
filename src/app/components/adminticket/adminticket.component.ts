@@ -1,7 +1,39 @@
 import { Component, OnInit } from '@angular/core';
-import { MatTableDataSource } from '@angular/material/table';
+import { MatTable, MatTableDataSource } from '@angular/material/table';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import { AdminviewticketComponent } from '../adminviewticket/adminviewticket.component';
+import { Router } from '@angular/router';
+import { HttpClient } from '@angular/common/http';
+
+class Ticket{
+        ticketId: number;
+        status: string;
+        priority: string;
+        createdByUserId: number;
+        title: string;
+        startDate: Date;
+        dueDate: Date;
+        description: string;
+        comments: any;
+        attachments: any;
+        category: {
+            "categoryId": number,
+            "name": string
+        };
+        user: any;
+        constructor(ticketId:number,status:string,priority:string,createdByUserId:number,title:string,startDate:Date,dueDate:Date,description:string,category:any){
+          this.ticketId=ticketId;
+          this.createdByUserId=createdByUserId;
+          this.title=title;
+          this.startDate=startDate;
+          this.status=status;
+          this.dueDate=dueDate;
+          this.priority=priority;
+          this.description=description;
+          this.category=category;
+        }
+}
+
 
 export interface PeriodicElement {
   title: string;
@@ -29,13 +61,32 @@ const ELEMENT_DATA: PeriodicElement[] = [
 })
 export class AdminticketComponent implements OnInit {
 
-  constructor(public dialog: MatDialog) { }
+  collection:Ticket[]=[];
+  dataSource:any;
+  table!: MatTable<any>;
+
+  constructor(public dialog: MatDialog, public router: Router, private http:HttpClient) {
+
+    const headers = { 'email': 'member3@gmail.com'};
+    let url="http://localhost:8080/ticket";
+    this.http.get<any>(url,{headers}).subscribe(
+      response=>{
+        console.log(response);
+        this.collection=response;
+        this.dataSource=new MatTableDataSource(this.collection);
+        console.log(this.collection);
+        //this.table.renderRows();
+      }
+    )
+
+
+   }
 
   ngOnInit(): void {
   }
 
-  displayedColumns: string[] = ['sno', 'title', 'group','view'];
-  dataSource = new MatTableDataSource(ELEMENT_DATA);
+  displayedColumns: string[] = ['sno', 'title','description', 'category','status', 'priority', 'creator', 'assignedto','comment','attachment'];
+  //dataSource = new MatTableDataSource(ELEMENT_DATA);
 
   applyFilter(event: any){
     this.dataSource.filter = event.target.value.trim().toLowerCase();

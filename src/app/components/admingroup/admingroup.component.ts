@@ -3,15 +3,19 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { MatTable, MatTableDataSource } from '@angular/material/table';
+import { Router } from '@angular/router';
 import { AdminviewgroupComponent } from '../adminviewgroup/adminviewgroup.component';
 
 class Group {
-  name: string;
-  sno: number;
-  category: string;
-  constructor(name:string,sno:number,category:string){
-    this.name=name;
-    this.sno=sno;
+  groupName: string;
+  groupId: number;
+  category: {
+    categoryId:number,
+    name:string
+  };
+  constructor(groupName:string,groupId:number,category:any){
+    this.groupName=groupName;
+    this.groupId=groupId;
     this.category=category;
   }
 }
@@ -37,45 +41,48 @@ export class AdmingroupComponent implements OnInit {
 
   formGroup: FormGroup = new FormGroup({
     name: new FormControl('',Validators.required),
-    category: new FormControl('',Validators.required),
-   
+    categoryId: new FormControl('',Validators.required),
+    categoryName: new FormControl('',Validators.required),
   })
 
 
   categories:Categories[]=[];
 
-  name = new FormControl('');
-  category=new FormControl('');
+  
 
   @ViewChild(MatTable, { static: true })
   table!: MatTable<any>;
 
-  collection: Group[] = [
-    {sno: 1, name: 'Hydrogen', category:"IT"},
-    {sno: 2, name: 'Helium', category:"IT"},
-    {sno: 3, name: 'Lithium', category:"SALES"},
-    {sno: 4, name: 'Beryllium', category:"IT"},
-    {sno: 5, name: 'Boron', category:"SALES"},
-    {sno: 6, name: 'Carbon', category:"SALES"},
-    {sno: 7, name: 'Nitrogen', category:"IT"},
-    {sno: 8, name: 'Oxygen', category:"IT"},
-    {sno: 9, name: 'Fluorine', category:"SALES"},
-    {sno: 10, name: 'Neon', category:"IT"},
-  ];
+  collection: Group[] = [];
 
   searchtext:string ="";
 
 
-  constructor(public dialog: MatDialog, private http:HttpClient) {
+  constructor(public dialog: MatDialog, private http:HttpClient,public router: Router) {
 
 
     let url="http://localhost:8080/category";
     this.http.get<any>(url).subscribe(
       response=>{
-        console.log(response);
+        //console.log(response);
         this.categories=response;
       }
     )
+
+
+      
+    let url2="http://localhost:8080/group";
+    this.http.get<any>(url2).subscribe(
+      response=>{
+        console.log(response);
+        this.collection=response;
+        this.dataSource=new MatTableDataSource(this.collection);
+        console.log(this.collection);
+        this.table.renderRows();
+      }
+    )
+
+
 
 
    }
@@ -88,10 +95,23 @@ export class AdmingroupComponent implements OnInit {
   dataSource=new MatTableDataSource(this.collection);
   
   add(){
-    
+    const headers = { 'email': 'nayan@gmail.com'};
+    let url="http://localhost:8080/group";
+
+    this.http.post(url, {
+      groupName:this.formGroup.value.name,
+      category:{
+        categoryId: this.formGroup.value.categoryId,
+        name:this.formGroup.value.categoryName
+      }
+    },{headers}).toPromise().then((data:any)=>{
+      console.log(data);
+     
+    });
+    this.router.navigate(['/admingroup']).then(() => {
+    window.location.reload();
+  });
   
-  this.dataSource.data.push({sno:this.collection.length+1,name:this.formGroup.value.name,category:this.formGroup.value.category});  
-  this.table.renderRows();
   
   }
 
@@ -109,3 +129,5 @@ export class AdmingroupComponent implements OnInit {
 
 
 }
+
+
