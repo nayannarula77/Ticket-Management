@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
@@ -12,6 +13,17 @@ class Group {
     this.name=name;
     this.sno=sno;
     this.category=category;
+  }
+}
+
+class Categories {
+  name: string;
+  categoryId: number;
+  groups:any;
+  ticket:any;
+  constructor(name:string,categoryId:number){
+    this.name=name;
+    this.categoryId=categoryId;
   }
 }
 
@@ -30,7 +42,7 @@ export class AdmingroupComponent implements OnInit {
   })
 
 
-  categories=['IT','SALES'];
+  categories:Categories[]=[];
 
   name = new FormControl('');
   category=new FormControl('');
@@ -54,7 +66,19 @@ export class AdmingroupComponent implements OnInit {
   searchtext:string ="";
 
 
-  constructor(public dialog: MatDialog) { }
+  constructor(public dialog: MatDialog, private http:HttpClient) {
+
+
+    let url="http://localhost:8080/category";
+    this.http.get<any>(url).subscribe(
+      response=>{
+        console.log(response);
+        this.categories=response;
+      }
+    )
+
+
+   }
 
   ngOnInit(): void {
   }

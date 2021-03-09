@@ -3,11 +3,14 @@ import { MatTable, MatTableDataSource } from '@angular/material/table';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import {HttpClient} from '@angular/common/http';
 import { identifierModuleUrl } from '@angular/compiler';
+import { NavigationEnd, Router } from '@angular/router';
 
 
 class Categories {
   name: string;
   categoryId: number;
+  groups:any;
+  ticket:any;
   constructor(name:string,categoryId:number){
     this.name=name;
     this.categoryId=categoryId;
@@ -36,40 +39,38 @@ export class AdmincategoryComponent implements OnInit {
   @ViewChild(MatTable, { static: true })
   table!: MatTable<any>;
 
-  collection: Categories[] = [
-    {categoryId: 1, name: 'Hydrogen'},
-    {categoryId: 2, name: 'Helium'},
-    {categoryId: 3, name: 'Lithium'},
-    {categoryId: 4, name: 'Beryllium'},
-    {categoryId: 5, name: 'Boron'},
-    {categoryId: 6, name: 'Carbon'},
-    {categoryId: 7, name: 'Nitrogen'},
-    {categoryId: 8, name: 'Oxygen'},
-    {categoryId: 9, name: 'Fluorine'},
-    {categoryId: 10, name: 'Neon'},
-  ];
+  collection: Categories[] = [];
 
   searchtext:string ="";
-  constructor(private http:HttpClient) {
+
+  dataSource:any;
+  
+  constructor(private http:HttpClient,public router: Router) {
 
     let url="http://localhost:8080/category";
-    this.http.get(url).toPromise().then(
-      data=>{
-        console.log(data);
-
-        
-
+    this.http.get<any>(url).subscribe(
+      response=>{
+        console.log(response);
+        this.collection=response;
+        this.dataSource=new MatTableDataSource(this.collection);
+        console.log(this.collection);
+        this.table.renderRows();
       }
     )
+
+
+
+
 
    }
 
   ngOnInit(): void {
+    
   }
 
   displayedColumns: string[] = ['categoryId', 'name'];
  
-  dataSource=new MatTableDataSource(this.collection);
+  
   
   add(){
   
@@ -79,11 +80,14 @@ export class AdmincategoryComponent implements OnInit {
     this.http.post(url, {
       name:this.formGroup.value.name
     }).toPromise().then((data:any)=>{
-      console.log(data)
+      console.log(data);
+     
     });
+    this.router.navigate(['/admincategory']).then(() => {
+    window.location.reload();
+  });
   
-  this.dataSource.data.push({categoryId:this.collection.length+1,name:this.formGroup.value.name});  
-  this.table.renderRows();
+  
   
   }
 
