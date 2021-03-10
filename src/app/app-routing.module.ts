@@ -8,6 +8,9 @@ import { AdmingroupComponent } from './components/admingroup/admingroup.componen
 import { AdmincategoryComponent } from './components/admincategory/admincategory.component';
 import { AdminaddmemberComponent } from './components/adminaddmember/adminaddmember.component';
 import { AdminviewmemberbygroupidComponent } from './components/adminviewmemberbygroupid/adminviewmemberbygroupid.component';
+import { MemberhomeComponent } from './components/memberhome/memberhome.component';
+import { UserhomeComponent } from './components/userhome/userhome.component';
+import { UsercreateticketComponent } from './components/usercreateticket/usercreateticket.component';
 const routes: Routes = [
   {path:'', component:HomescreenComponent},
   {path:'signup',component:SignupComponent},
@@ -16,7 +19,10 @@ const routes: Routes = [
   {path:'admingroup',component:AdmingroupComponent},
   {path:'admincategory',component:AdmincategoryComponent},
   {path:'adminaddmember',component:AdminaddmemberComponent},
-  {path:'adminviewmemberbygroupid',component:AdminviewmemberbygroupidComponent}
+  {path:'adminviewmemberbygroupid',component:AdminviewmemberbygroupidComponent},
+  {path:'memberhome',component:MemberhomeComponent},
+  {path:'userhome',component:UserhomeComponent},
+  {path:'usercreateticket',component:UsercreateticketComponent}
 ];
 
 @NgModule({

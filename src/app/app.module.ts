@@ -30,7 +30,9 @@ import { AdminviewgroupComponent } from './components/adminviewgroup/adminviewgr
 import { AdminaddmemberComponent } from './components/adminaddmember/adminaddmember.component';
 import { HttpClientModule } from '@angular/common/http';
 import { AdminviewmemberbygroupidComponent } from './components/adminviewmemberbygroupid/adminviewmemberbygroupid.component';
-
+import { MemberhomeComponent } from './components/memberhome/memberhome.component';
+import { UserhomeComponent } from './components/userhome/userhome.component';
+import { UsercreateticketComponent } from './components/usercreateticket/usercreateticket.component';
 
 @NgModule({
   declarations: [
@@ -44,7 +46,10 @@ import { AdminviewmemberbygroupidComponent } from './components/adminviewmemberb
     AdminviewticketComponent,
     AdminviewgroupComponent,
     AdminaddmemberComponent,
-    AdminviewmemberbygroupidComponent
+    AdminviewmemberbygroupidComponent,
+    MemberhomeComponent,
+    UserhomeComponent,
+    UsercreateticketComponent
   ],
   imports: [
     BrowserModule,

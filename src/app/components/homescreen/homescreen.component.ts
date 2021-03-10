@@ -44,10 +44,10 @@ export class HomescreenComponent implements OnInit {
         this.router.navigate(['/adminhome']);
       }
       else if(data.type=="USER"){
-        this.router.navigate(['/']);
+        this.router.navigate(['/userhome']);
       }
       else if(data.type=="MEMBER"){
-        this.router.navigate(['/']);
+        this.router.navigate(['/memberhome']);
       }
 
     });
