@@ -1,21 +1,22 @@
 <div class="main">
-<p>
-    <mat-toolbar color="primary">
+<p >
+    <mat-toolbar color="primary" style=" width: 100%;   top: 0;left: 0;z-index: 2;position: fixed;">
       
       <span>Tickets</span>
-
+      
       <div class="spacer"></div>
     <a mat-button routerLink="/adminticket">Ticket</a>
     <a mat-button routerLink="/admingroup">Group</a>
     <a mat-button routerLink="/admincategory">Category</a>
-    <a mat-button routerLink="/">Log Out</a>
+    <a mat-button routerLink="/" (click)="logout()">Log Out</a>
     </mat-toolbar>
   </p>
 
-
+<br><br><br>
   <mat-form-field fxLayoutAlign="center center" >
     <input (keyup)="applyFilter($event)" matInput placeholder="Search">
   </mat-form-field>
+  
 
   <table mat-table [dataSource]="dataSource" class="mat-elevation-z8"  fxFlexFill >
 
@@ -56,12 +57,12 @@
 
     <ng-container matColumnDef="creator">
       <th mat-header-cell *matHeaderCellDef> Created by </th>
-      <td mat-cell *matCellDef="let element"> {{element.createdByUserId}} </td> 
+      <td mat-cell *matCellDef="let element"> {{element.createdByUserId.name}} </td> 
     </ng-container>
 
     <ng-container matColumnDef="assignedto">
       <th mat-header-cell *matHeaderCellDef> Assigned To </th>
-      <td mat-cell *matCellDef="let element"> API not Ready </td> 
+      <td mat-cell *matCellDef="let element"> {{element.user.name}} </td> 
     </ng-container>
 
     <ng-container matColumnDef="startdate">
@@ -76,18 +77,24 @@
 
     <ng-container matColumnDef="comment">
       <th mat-header-cell *matHeaderCellDef> Comment </th>
-      <td mat-cell *matCellDef="let element"> {{element.comments}} </td> 
+      <td mat-cell *matCellDef="let element"> {{element.comments[0]?.comment || "No Comment Given" }} <br> {{element.comments[1]?.comment }}<br> {{element.comments[2]?.comment }}<br> {{element.comments[3]?.comment }}<br> {{element.comments[4]?.comment }}</td> 
     </ng-container>
 
-    <ng-container matColumnDef="attachment">
-      <th mat-header-cell *matHeaderCellDef> Attachment  </th>
+    <ng-container matColumnDef="attachment1">
+      <th mat-header-cell *matHeaderCellDef> Attachment  1</th>
      
-      <td mat-cell *matCellDef="let element">  <button mat-raised-button  color="primary">Download</button> </td> 
+      <td mat-cell *matCellDef="let element">  <button mat-raised-button  color="accent"><a href="http://localhost:8080/ticket/downloadAttachment/{{element.attachments[0]?.attachmentId}}">Download</a></button> </td> 
     </ng-container>
    
-    
+    <ng-container matColumnDef="attachment2">
+      <th mat-header-cell *matHeaderCellDef> Attachment  1</th>
+     
+      <td mat-cell *matCellDef="let element">  <button mat-raised-button  color="accent"><a href="http://localhost:8080/ticket/downloadAttachment/{{element.attachments[1]?.attachmentId}}">Download</a></button> </td> 
+    </ng-container>
   
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
   </table>
+
+  
 </div>

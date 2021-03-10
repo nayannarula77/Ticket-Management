@@ -60,6 +60,10 @@ export class AdminviewmemberbygroupidComponent implements OnInit {
     this.dataSource.filter = event.target.value.trim().toLowerCase();
   }
 
+  logout(){
+    sessionStorage.setItem("email","");
+  }
+
   displayedColumns: string[] = ['userId', 'name'];
 
 }

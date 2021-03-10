@@ -9,19 +9,33 @@ class Ticket{
         ticketId: number;
         status: string;
         priority: string;
-        createdByUserId: number;
+        createdByUserId: {
+          userId:number,
+          name:string,
+          email:string,
+          password:string,
+          type:string,
+          groups:any
+        };
         title: string;
         startDate: Date;
         dueDate: Date;
         description: string;
-        comments: any;
+        comments: any
         attachments: any;
         category: {
             "categoryId": number,
             "name": string
         };
-        user: any;
-        constructor(ticketId:number,status:string,priority:string,createdByUserId:number,title:string,startDate:Date,dueDate:Date,description:string,category:any){
+        user: {
+          userId:number,
+          name:string,
+          email:string,
+          password:string,
+          type:string,
+          groups:any
+        };
+        constructor(ticketId:number,status:string,priority:string,createdByUserId:any,title:string,startDate:Date,dueDate:Date,description:string,category:any,user:any){
           this.ticketId=ticketId;
           this.createdByUserId=createdByUserId;
           this.title=title;
@@ -31,6 +45,7 @@ class Ticket{
           this.priority=priority;
           this.description=description;
           this.category=category;
+          this.user=user;
         }
 }
 
@@ -61,13 +76,21 @@ const ELEMENT_DATA: PeriodicElement[] = [
 })
 export class AdminticketComponent implements OnInit {
 
+  isActive = true;
   collection:Ticket[]=[];
   dataSource:any;
   table!: MatTable<any>;
 
   constructor(public dialog: MatDialog, public router: Router, private http:HttpClient) {
 
-    const headers = { 'email': 'member3@gmail.com'};
+  
+    
+    
+    let adminemail=sessionStorage.getItem("email") || "";
+    const headers = { 'email': adminemail};
+
+    console.log(headers);
+
     let url="http://localhost:8080/ticket";
     this.http.get<any>(url,{headers}).subscribe(
       response=>{
@@ -85,15 +108,15 @@ export class AdminticketComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  displayedColumns: string[] = ['sno', 'title','description', 'category','status', 'priority', 'creator', 'assignedto','startdate','duedate','comment','attachment'];
+  displayedColumns: string[] = ['sno', 'title','description', 'category','status', 'priority', 'creator', 'assignedto','startdate','duedate','comment','attachment1','attachment2'];
   //dataSource = new MatTableDataSource(ELEMENT_DATA);
 
   applyFilter(event: any){
     this.dataSource.filter = event.target.value.trim().toLowerCase();
   }
  
-  openDialog(): void {
-    this.dialog.open(AdminviewticketComponent);
-    }
+  logout(){
+    sessionStorage.setItem("email","");
+  }
 
 }

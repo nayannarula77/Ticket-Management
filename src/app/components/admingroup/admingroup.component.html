@@ -1,7 +1,7 @@
 
 <div class="main">
 <p>
-    <mat-toolbar color="primary">
+  <mat-toolbar color="primary" style=" width: 100%;   top: 0;left: 0;z-index: 2;position: fixed;">
       
       <span>Group</span>
 
@@ -9,10 +9,10 @@
     <a mat-button routerLink="/adminticket">Ticket</a>
     <a mat-button routerLink="/admingroup">Group</a>
     <a mat-button routerLink="/admincategory">Category</a>
-    <a mat-button routerLink="/">Log Out</a>
+    <a mat-button routerLink="/" (click)=logout()>Log Out</a>
     </mat-toolbar>
   </p>
-    
+    <br><br><br>
   <form fxLayoutAlign="center center" fxLayout="column" [formGroup]="formGroup" >
     <mat-form-field fxLayoutAlign="end">
       <input (keyup)="applyFilter($event)" matInput placeholder="Search">

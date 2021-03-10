@@ -50,5 +50,9 @@ export class AdminviewgroupComponent implements OnInit {
     this.table.renderRows();
   }
 
+  logout(){
+    sessionStorage.setItem("email","");
+  }
+
 
 }

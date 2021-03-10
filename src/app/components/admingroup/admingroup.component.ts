@@ -61,13 +61,7 @@ export class AdmingroupComponent implements OnInit {
   constructor(public dialog: MatDialog, private http:HttpClient,public router: Router) {
 
 
-    let url="http://localhost:8080/category";
-    this.http.get<any>(url).subscribe(
-      response=>{
-        //console.log(response);
-        this.categories=response;
-      }
-    )
+    
 
 
       
@@ -95,7 +89,8 @@ export class AdmingroupComponent implements OnInit {
   dataSource=new MatTableDataSource(this.collection);
   
   add(){
-    const headers = { 'email': 'nayan@gmail.com'};
+    let adminemail=sessionStorage.getItem("email") || "";
+    const headers = { 'email': adminemail};
     let url="http://localhost:8080/group";
 
     this.http.post(url, {
@@ -125,7 +120,9 @@ export class AdmingroupComponent implements OnInit {
 
 
 
-
+logout(){
+  sessionStorage.setItem("email","");
+}
 
 
 }

@@ -95,4 +95,8 @@ export class AdmincategoryComponent implements OnInit {
     this.dataSource.filter = event.target.value.trim().toLowerCase();
   }
  
+  logout(){
+    sessionStorage.setItem("email","");
+  }
+
 }

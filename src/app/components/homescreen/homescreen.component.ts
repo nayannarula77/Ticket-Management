@@ -31,6 +31,9 @@ export class HomescreenComponent implements OnInit {
 
     let url="http://localhost:8080/user/login";
 
+
+    sessionStorage.setItem("email",this.formGroup.value.email );
+
     this.http.post(url, {
       email:this.formGroup.value.email,
       password:this.formGroup.value.password,

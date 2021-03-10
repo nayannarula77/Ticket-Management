@@ -73,4 +73,8 @@ applyFilter(event: any){
   this.dataSource.filter = event.target.value.trim().toLowerCase();
 }
 
+logout(){
+  sessionStorage.setItem("email","");
+}
+
 }
