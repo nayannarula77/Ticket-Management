@@ -83,13 +83,13 @@
     <ng-container matColumnDef="attachment1">
       <th mat-header-cell *matHeaderCellDef> Attachment  1</th>
      
-      <td mat-cell *matCellDef="let element">  <button mat-raised-button  color="accent"><a href="http://localhost:8080/ticket/downloadAttachment/{{element.attachments[0]?.attachmentId}}">Download</a></button> </td> 
+      <td mat-cell *matCellDef="let element">  <a mat-raised-button  color="primary" [disabled]="! element.attachments[0]" href="http://localhost:8080/ticket/downloadAttachment/{{element.attachments[0]?.attachmentId}}">Download</a> </td> 
     </ng-container>
    
     <ng-container matColumnDef="attachment2">
-      <th mat-header-cell *matHeaderCellDef> Attachment  1</th>
+      <th mat-header-cell *matHeaderCellDef> Attachment  2</th>
      
-      <td mat-cell *matCellDef="let element">  <button mat-raised-button  color="accent"><a href="http://localhost:8080/ticket/downloadAttachment/{{element.attachments[1]?.attachmentId}}">Download</a></button> </td> 
+      <td mat-cell *matCellDef="let element">  <a mat-raised-button  color="primary" [disabled]="! element.attachments[1]" href="http://localhost:8080/ticket/downloadAttachment/{{element.attachments[1]?.attachmentId}}">Download</a>  </td> 
     </ng-container>
   
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
