@@ -95,11 +95,14 @@ export class UsercreateticketComponent implements OnInit {
     console.log(this.formGroup.value.description);
     console.log(this.formGroup.value.categoryId);
     console.log(this.formGroup.value.categoryName);
-    
+    /*
     const headers ={
       'email' : 'user1@gmail.com'
     };
-    
+    */
+   
+    let adminemail=sessionStorage.getItem("email") || "";
+    const headers = { 'email': adminemail};
     let url="http://localhost:8080/ticket";
 
     this.http.post(url, {

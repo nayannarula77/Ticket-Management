@@ -85,8 +85,12 @@ export class MemberhomeComponent implements OnInit {
 
   constructor(public dialog: MatDialog, public router: Router, private http:HttpClient) {
   
-    
+    /*
     const headers = { 'email': 'admin@gmail.com'};
+    */
+   
+    let adminemail=sessionStorage.getItem("email") || "";
+    const headers = { 'email': adminemail};
 
     console.log(headers);
 
@@ -123,9 +127,14 @@ export class MemberhomeComponent implements OnInit {
   }
 upload(id:number){
   console.log(id);
+  /*
   const headers ={
     'email' : 'member1@gmail.com'
   };
+  */
+ 
+  let adminemail=sessionStorage.getItem("email") || "";
+  const headers = { 'email': adminemail};
   const fd =new FormData();
   fd.append('file',this.selectedFile!);
     
@@ -142,9 +151,14 @@ download(id:number){
 }
 ask(id:number){
   console.log(id);
+  /*
   const headers ={
     'email' : 'member1@gmail.com'
   };
+  */
+ 
+  let adminemail=sessionStorage.getItem("email") || "";
+  const headers = { 'email': adminemail};
   let url="http://localhost:8080/ticket/"+ id  +"/askForDetail";
   console.log(url);
     let str = this.http.get<any>(url).subscribe(
@@ -159,9 +173,14 @@ ask(id:number){
 }
 close(id:number){
   console.log(id);
+  /*
   const headers ={
     'email' : 'member1@gmail.com'
   };
+  */
+ 
+  let adminemail=sessionStorage.getItem("email") || "";
+  const headers = { 'email': adminemail};
   let url="http://localhost:8080/ticket/"+ id  +"/close";
   console.log(url);
   

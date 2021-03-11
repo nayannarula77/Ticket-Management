@@ -95,9 +95,14 @@ export class UserhomeComponent implements OnInit {
     }
     upload(id:number){
       console.log(id);
+      /*
       const headers ={
         'email' : 'member1@gmail.com'
       };
+      */
+     
+    let adminemail=sessionStorage.getItem("email") || "";
+    const headers = { 'email': adminemail};
       const fd =new FormData();
       fd.append('file',this.selectedFile!);
         
@@ -109,21 +114,26 @@ export class UserhomeComponent implements OnInit {
             console.log(res);
           });
     }
-    onSubmit() {
+    onSubmit(id : number) {
       console.log(this.formGroup.value.ipdata);
+      
+    let adminemail=sessionStorage.getItem("email") || "";
+    const headers = { 'email': adminemail};
+      /*
       const headers ={
         'email' : 'user1@gmail.com'
       };
+      */
       
-      let url="http://localhost:8080/ticket";
-      /*
+      let url="http://localhost:8080/ticket/"+id;
+      
       this.http.put(url, {
-        description = this.formGroup.value.ipdata
+        description : this.formGroup.value.ipdata
       
     },{headers}).toPromise().then((data:any)=>{
       console.log(data)
     });
-    */
+    
   }    
 
 }
