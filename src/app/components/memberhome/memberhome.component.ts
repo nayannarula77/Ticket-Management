@@ -1,10 +1,8 @@
-import { group } from '@angular/animations';
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatTable, MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
-import { AdminviewticketComponent } from '../adminviewticket/adminviewticket.component';
 
 class Ticket{
   ticketId: number;
@@ -50,27 +48,6 @@ class Ticket{
   }
 }
 
-
-export interface PeriodicElement {
-title: string;
-sno: number;
-group: string;
-}
-
-const ELEMENT_DATA: PeriodicElement[] = [
-{sno: 1, title: 'Hydrogen', group:'IT'},
-{sno: 2, title: 'Helium', group: 'IT'},
-{sno: 3, title: 'Lithium', group: 'SALES'},
-{sno: 4, title: 'Beryllium', group: 'SALES'},
-{sno: 5, title: 'Boron', group: 'IT'},
-{sno: 6, title: 'Carbon', group: 'SALES'},
-{sno: 7, title: 'Nitrogen', group: 'IT'},
-{sno: 8, title: 'Oxygen', group: 'IT'},
-{sno: 9, title: 'Fluorine', group: 'SALES'},
-{sno: 10, title: 'Neon', group: 'SALES'},
-];
-
-
 @Component({
   selector: 'app-memberhome',
   templateUrl: './memberhome.component.html',
@@ -82,6 +59,8 @@ export class MemberhomeComponent implements OnInit {
   collection:Ticket[]=[];
   dataSource:any;
   table!: MatTable<any>;
+  displayedColumns: string[] = ['sno', 'title','description', 'category','attachment1','attachment2','close','askfordetails'];
+  //dataSource = new MatTableDataSource(ELEMENT_DATA);
 
   constructor(public dialog: MatDialog, public router: Router, private http:HttpClient) {
   
@@ -111,9 +90,6 @@ export class MemberhomeComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  displayedColumns: string[] = ['sno', 'title','description', 'category','attachment1','attachment2','close','askfordetails'];
-  //dataSource = new MatTableDataSource(ELEMENT_DATA);
-
   applyFilter(event: any){
     this.dataSource.filter = event.target.value.trim().toLowerCase();
   }
@@ -137,8 +113,6 @@ upload(id:number){
   const headers = { 'email': adminemail};
   const fd =new FormData();
   fd.append('file',this.selectedFile!);
-    
-  
   let url='http://localhost:8080/ticket/'+id+'/uploadAttachment';
   this.http.put(url,fd,{headers})
     .subscribe(
@@ -187,9 +161,5 @@ close(id:number){
   this.http.put(url,{}).toPromise().then((data:any)=>{
     console.log(data)
   });
-  
-
-
 }
-
 }

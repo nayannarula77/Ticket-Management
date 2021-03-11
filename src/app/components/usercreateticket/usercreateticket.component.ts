@@ -1,10 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { MatTable, MatTableDataSource } from '@angular/material/table';
-import { Router } from '@angular/router';
+
 
 class Ticket{
   ticketId: number;
@@ -56,9 +54,7 @@ class attachments{
       this.ticket_ticket_id=ticket_ticket_id;
       this.user_id_user_id=user_id_user_id;
     }
-
 }
-
 
 @Component({
   selector: 'app-usercreateticket',
@@ -82,9 +78,6 @@ export class UsercreateticketComponent implements OnInit {
 
   fileToUpload: any ;
   constructor(private http : HttpClient,private _snackBar: MatSnackBar) { 
-    
-
-
   }
 
   ngOnInit(): void {
@@ -156,12 +149,9 @@ export class UsercreateticketComponent implements OnInit {
       console.log(data)
     });
     */
-     
-
   }
+
   logout(){
     sessionStorage.setItem("email","");
   }
-
-
 }
